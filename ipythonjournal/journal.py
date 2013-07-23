@@ -1,7 +1,10 @@
 import random
 import hashlib
+import datetime
+import os
 
 import matplotlib.pyplot as plt
+import pandas as pd
 
 def getId():
 	return "%s-%s" % (datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'), hashlib.sha1("%s" % random.random()).hexdigest()[:8])
@@ -21,10 +24,14 @@ class Journal(object):
 	def savefig(self):
 		filename = self.get_filename(ext='.png')
 		plt.savefig(filename)
-		print '<img src="files/{0}" />'.format(os.path.split(filename)[-1])
+		print '<img src="files/{0}" />'.format(filename)
+	def save_dataframe(self, df):
+		filename = self.get_filename(ext='.csv')
+		df.to_csv(filename)
+		print "import pandas as pd; from IPython.display import HTML; df = pd.read_csv('{0}',index_col=0);HTML(df.to_html());#plt.figsize(20,5);df.T.plot(kind='bar')".format(filename)
 
 def get_journal():
-	return Journal('Journal', 'files')
+	return Journal('Journal', 'Journal_files')
 
 def savefig():
 	get_journal().savefig()
