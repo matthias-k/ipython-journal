@@ -23,7 +23,7 @@ class Journal(object):
 		return filename
 	def savefig(self):
 		filename = self.get_filename(ext='.png')
-		plt.savefig(filename)
+		plt.savefig(filename, bbox_inches='tight')
 		print '<img src="files/{0}" />'.format(filename)
 	def save_dataframe(self, df):
 		filename = self.get_filename(ext='.csv')
@@ -35,3 +35,6 @@ def get_journal():
 
 def savefig():
 	get_journal().savefig()
+
+def save_dataframe(df):
+	get_journal().save_dataframe(df)
