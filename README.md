@@ -27,3 +27,6 @@ Saving pandas dataframes is possible as well
     >>> journal.save_dataframe(df)
 
         import pandas as pd; from IPython.display import HTML; df = pd.read_csv('Journal_files/2013-07-31_19-31-06-4978a3d1.csv',index_col=0);HTML(df.to_html());
+
+By using the `Journal` class, you can specify where the files should be put. Later, some configuration options via
+files might be added.
