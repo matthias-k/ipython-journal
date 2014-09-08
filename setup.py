@@ -3,7 +3,11 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.0.1'
+version = '0.0.2'
+
+entry_points = {
+    'console_scripts': ['ipython-journal=ipythonjournal.journal:main']
+    }
 
 setup(name='ipython-journal',
       version=version,
@@ -21,8 +25,6 @@ setup(name='ipython-journal',
 #      package_data={'':'LICENSE'},
       include_package_data=True,
       zip_safe=True,
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
+      entry_points=entry_points,
       use_2to3 = True,
       )
