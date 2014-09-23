@@ -20,6 +20,11 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 <style type="text/css">
+div.cell {
+  padding: 0px;
+  border-style: none;
+}
+
 div.output_wrapper {
   margin-top: 0px;
 }
