@@ -44,11 +44,27 @@ div.input_wrapper {
 
 <script>
 $(document).ready(function(){
+  // Add show/hide functionally by clicking on cells
   $(".output_hidden").click(function(){
       $(this).prev('.input_hidden').slideToggle();
   });
   $(".input_hidden").click(function(){
       $(this).next('.output_hidden').slideToggle();
+  });
+
+  // Add global links at top of notebook to show or hide all input
+  $('body').prepend('<div><span id="showinput"><a>Show Inputs</a></span><span id="hideinput" style="display:None"><a>Hide Inputs</a></span></div>');
+
+  // Make the links at top of notebook functional
+  $("#showinput").click(function(){
+      $('.input_hidden').slideDown();
+      $('#showinput').hide();
+      $('#hideinput').show();
+  });
+  $("#hideinput").click(function(){
+      $('.input_hidden').slideUp();
+      $('#showinput').show();
+      $('#hideinput').hide();
   });
 
 })
