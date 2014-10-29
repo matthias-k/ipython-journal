@@ -7,7 +7,6 @@ import subprocess as sp
 import shutil
 import random
 
-import matplotlib.pyplot as plt
 
 
 def getId():
@@ -33,6 +32,7 @@ class Journal(object):
         return filename
 
     def savefig(self):
+        import matplotlib.pyplot as plt
         filename = self.get_filename(ext='.png')
         self.ensure_path_exists()
         plt.savefig(filename, bbox_inches='tight')
