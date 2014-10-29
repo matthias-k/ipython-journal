@@ -24,10 +24,11 @@ before_install:
   - conda info -a
 install:
   # Replace dep1 dep2 ... with your dependencies
-  - conda create -n test-environment python=$TRAVIS_PYTHON_VERSION numpy matplotlib setuptools pip
+  - conda create -n test-environment python=$TRAVIS_PYTHON_VERSION numpy matplotlib setuptools pip ipython
   - source activate test-environment
   - pip install nose nose-cov python-coveralls
   - conda info -a
+  - python setup.py install
 # command to run tests
 script:
   - nosetests --with-coverage --cover-package=ipythonjournal
