@@ -19,6 +19,10 @@ class Journal(object):
         self.name = name
         self.path = path
 
+    def ensure_path_exists(self):
+        if not os.path.exists(self.path):
+            os.makedirs(self.path)
+
     def get_filename(self, ext=None):
         filename = getId()
         if ext is not None:
@@ -30,11 +34,13 @@ class Journal(object):
 
     def savefig(self):
         filename = self.get_filename(ext='.png')
+        self.ensure_path_exists()
         plt.savefig(filename, bbox_inches='tight')
         print '<img src="files/{0}" />'.format(filename)
 
     def save_dataframe(self, df):
         filename = self.get_filename(ext='.csv')
+        self.ensure_path_exists()
         df.to_csv(filename)
         print "import pandas as pd; from IPython.display import HTML; df = pd.read_csv('{0}',index_col=0);HTML(df.to_html());#plt.figsize(20,5);df.T.plot(kind='bar')".format(filename)
 
@@ -61,9 +67,10 @@ class Journal(object):
         local_template = None
 
         while not local_template or os.path.exists(local_template):
-            local_template = template+str(random.randint(0,1000))
+            local_template = template+str(random.randint(0, 1000))
 
         shutil.copy(template_file, local_template)
+        self.ensure_path_exists()
 
         try:
             output_filename = self.get_filename()
