@@ -1,3 +1,4 @@
+from __future__ import print_function
 import random
 import hashlib
 import datetime
@@ -36,13 +37,13 @@ class Journal(object):
         filename = self.get_filename(ext='.png')
         self.ensure_path_exists()
         plt.savefig(filename, bbox_inches='tight')
-        print '<img src="files/{0}" />'.format(filename)
+        print('<img src="files/{0}" />'.format(filename))
 
     def save_dataframe(self, df):
         filename = self.get_filename(ext='.csv')
         self.ensure_path_exists()
         df.to_csv(filename)
-        print "import pandas as pd; from IPython.display import HTML; df = pd.read_csv('{0}',index_col=0);HTML(df.to_html());#plt.figsize(20,5);df.T.plot(kind='bar')".format(filename)
+        print("import pandas as pd; from IPython.display import HTML; df = pd.read_csv('{0}',index_col=0);HTML(df.to_html());#plt.figsize(20,5);df.T.plot(kind='bar')".format(filename))
 
     def save_notebook(self, notebook, template='toggle_no_input.tpl'):
         """
@@ -79,7 +80,7 @@ class Journal(object):
         finally:
             os.remove(local_template)
 
-        print "[Linkname]({0}.html)".format(output_filename)
+        print("[Linkname]({0}.html)".format(output_filename))
 
 
 def get_journal():
