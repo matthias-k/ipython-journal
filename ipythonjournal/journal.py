@@ -11,7 +11,7 @@ import random
 
 
 def getId():
-    return "%s-%s" % (datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'), hashlib.sha1("%s" % random.random()).hexdigest()[:8])
+    return "%s-%s" % (datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'), hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:8])
 
 
 class Journal(object):
