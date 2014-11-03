@@ -32,11 +32,13 @@ class Journal(object):
         filename = os.path.join(self.path, filename)
         return filename
 
-    def savefig(self):
+    def savefig(self, figure=None):
         import matplotlib.pyplot as plt
         filename = self.get_filename(ext='.png')
         self.ensure_path_exists()
-        plt.savefig(filename, bbox_inches='tight')
+        if figure is None:
+            figure = plt
+        figure.savefig(filename, bbox_inches='tight')
         print('<img src="files/{0}" />'.format(filename))
 
     def save_dataframe(self, df):
@@ -87,8 +89,8 @@ def get_journal():
     return Journal('Journal', 'Journal_files')
 
 
-def savefig():
-    get_journal().savefig()
+def savefig(figure=None):
+    get_journal().savefig(figure=figure)
 
 
 def save_dataframe(df):
