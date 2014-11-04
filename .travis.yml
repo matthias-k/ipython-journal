@@ -24,7 +24,7 @@ before_install:
   - conda info -a
 install:
   # Replace dep1 dep2 ... with your dependencies
-  - conda create -n test-environment python=$TRAVIS_PYTHON_VERSION numpy matplotlib setuptools pip ipython
+  - conda create -n test-environment python=$TRAVIS_PYTHON_VERSION numpy matplotlib setuptools pip ipython jinja2 pygments
   - source activate test-environment
   - pip install nose nose-cov python-coveralls
   - conda info -a

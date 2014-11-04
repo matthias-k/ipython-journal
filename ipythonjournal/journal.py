@@ -8,7 +8,7 @@ import subprocess as sp
 import shutil
 import random
 
-
+from pkg_resources import resource_string
 
 def getId():
     return "%s-%s" % (datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'), hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:8])
@@ -63,16 +63,20 @@ class Journal(object):
         # templates outside current directory at the moment
         # Therefore we copy the template into the current
         # directory and delete it afterwards
-        file_location = os.path.realpath(__file__)
-        file_directory = os.path.dirname(file_location)
-        template_file = os.path.join(file_directory, 'data', template)
+        #file_location = os.path.realpath(__file__)
+        #file_directory = os.path.dirname(file_location)
+        #template_file = os.path.join(file_directory, 'data', template)
 
         local_template = None
 
         while not local_template or os.path.exists(local_template):
             local_template = template+str(random.randint(0, 1000))
 
-        shutil.copy(template_file, local_template)
+        #if not os.path.exists(template_file):
+        #    raise ValueError('Template file not found at', template_file)
+        #shutil.copy(template_file, local_template)
+        with open(local_template, 'w') as f:
+            f.write(resource_string(__name__, 'data/{}'.format(template)))
         self.ensure_path_exists()
 
         try:
