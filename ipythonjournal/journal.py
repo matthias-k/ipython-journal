@@ -75,7 +75,7 @@ class Journal(object):
         #if not os.path.exists(template_file):
         #    raise ValueError('Template file not found at', template_file)
         #shutil.copy(template_file, local_template)
-        with open(local_template, 'w') as f:
+        with open(local_template, 'wb') as f:
             f.write(resource_string(__name__, 'data/{}'.format(template)))
         self.ensure_path_exists()
 
