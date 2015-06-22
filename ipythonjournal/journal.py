@@ -39,7 +39,7 @@ class Journal(object):
         if figure is None:
             figure = plt
         figure.savefig(filename, bbox_inches='tight')
-        print('<img src="files/{0}" />'.format(filename))
+        print('<img src="{0}" />'.format(filename))
 
     def save_dataframe(self, df):
         filename = self.get_filename(ext='.csv')
