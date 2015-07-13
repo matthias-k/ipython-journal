@@ -2,13 +2,13 @@ from __future__ import print_function
 import random
 import hashlib
 import datetime
-import sys
 import os
 import subprocess as sp
 import shutil
-import random
+import argparse
 
 from pkg_resources import resource_string
+
 
 def getId():
     return "%s-%s" % (datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'), hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:8])
@@ -102,9 +102,15 @@ def save_dataframe(df):
 
 
 def main():
-    journal = get_journal()
-    if len(sys.argv) > 1:
-        for filename in sys.argv[1:]:
+    parser = argparse.ArgumentParser('ipython-journal')
+    parser.add_argument('-d', '--directory', default='Journal_files', help='Directory of ipython journal to use')
+    parser.add_argument('filename', help='File to save in journal')
+    args = parser.parse_args()
+    journal = Journal('Journal', args.directory)
+    #if len(sys.argv) > 1:
+    #    for filename in sys.argv[1:]:
+    filename = args.filename
+    if filename:
             ext = os.path.splitext(filename)[1]
             if ext.lower() == '.ipynb':
                 journal.save_notebook(filename)
