@@ -69,3 +69,8 @@ class JournalTest(TestCase):
         sp.check_call(['ipython-journal', notebook_file])
         self.assert_files_present(html=1)
 
+    def test_import_file(self):
+        import_file = os.path.join('tmp_dir', 'test.txt')
+        open(import_file, 'w').write('test')
+        ipythonjournal.get_journal().import_file(import_file)
+        self.assert_files_present(txt=1)

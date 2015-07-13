@@ -47,6 +47,19 @@ class Journal(object):
         df.to_csv(filename)
         print("import pandas as pd; from IPython.display import HTML; df = pd.read_csv('{0}',index_col=0);HTML(df.to_html());#plt.figsize(20,5);df.T.plot(kind='bar')".format(filename))
 
+    def import_file(self, filename):
+        """
+        Import an arbitrary file into the journal by copying it into
+        the files directory of the journal and renaming to
+        <id>.ext.
+        """
+        stem, ext = os.path.splitext(filename)
+        ext = ext or None
+        target_filename = self.get_filename(ext=ext)
+        self.ensure_path_exists()
+        shutil.copy2(filename, target_filename)
+        print(target_filename)
+
     def save_notebook(self, notebook, template='toggle_no_input.tpl'):
         """
         Convert a notebook into an HTML file with inlined figures
