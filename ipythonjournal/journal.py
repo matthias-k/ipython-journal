@@ -128,7 +128,7 @@ def main():
             if ext.lower() == '.ipynb':
                 journal.save_notebook(filename)
             else:
-                raise NotImplementedError('cannot handle files of format {0}'.format(ext))
+                journal.import_file(filename)
 
 if __name__ == '__main__':
     main()
